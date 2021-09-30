@@ -13,7 +13,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('login.post') }}" method="post">
+            <form method="POST" action="{{ route('login.post') }}">
                 @csrf
 
                 <x-input
@@ -26,7 +26,7 @@
                     autocorrect="off"
                 />
 
-                <button type="submit" class="btn btn-primary mt-3">Criar conta</button>
+                <button type="submit" class="btn btn-primary mt-3">Entrar</button>
             </form>
         </div>
     </div>

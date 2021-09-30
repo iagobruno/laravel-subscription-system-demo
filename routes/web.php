@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'landing')->name('landing');
 
-Route::get('/login', [AuthController::class, 'show'])->name('login');
-Route::post('/login', [AuthController::class, 'handle'])->name('login.post');
-Route::post('/logout', [LogoutController::class, 'handle'])->name('logout');
+Route::get('/login', [AuthController::class, 'show'])->middleware('guest')->name('login');
+Route::post('/login', [AuthController::class, 'handle'])->middleware('guest')->name('login.post');
+Route::post('/logout', [LogoutController::class, 'handle'])->middleware('auth')->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/subscribe', [SubscriptionController::class, 'show'])->name('subscribe');
+    Route::post('/subscribe', [SubscriptionController::class, 'handle'])->name('subscribe.post');
+});

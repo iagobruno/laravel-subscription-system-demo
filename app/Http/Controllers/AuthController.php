@@ -15,15 +15,19 @@ class AuthController extends Controller
 
     public function handle()
     {
+        $username = request()->input('username');
+
         $user = User::firstOrCreate([
-            'username' => request()->input('username'),
+            'username' => $username,
+        ]);
+        $user->createOrGetStripeCustomer([
+            'name' => $username,
         ]);
 
         Auth::login($user);
 
         request()->session()->regenerate();
 
-        // TODO: Redirecionar o usuário para página de assinatura se ele nao for assinante
-        return redirect()->intended('/dashboard');
+        return redirect()->intended(route('dashboard'));
     }
 }
