@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="turbo-cache-control" content="no-preview">
 
-    <title>@yield('page_title') - {{ config('app.name') }}</title>
+    <title>@hasSection('page_title')@yield('page_title') - @endif{{ config('app.name') }}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
@@ -21,14 +21,11 @@
     @if ($show_header ?? true)
         @include('layouts.partials.header')
     @endif
+    @includeIf('layouts.partials.flash-messages')
 
-    <div class="container_padding_top">
-        @include('layouts.partials.flash-messages')
-
-        <main class="container">
-            @yield('content')
-        </main>
-    </div>
+    <main class="container">
+        @yield('content')
+    </main>
 
     @stack('extra_body')
 </body>
