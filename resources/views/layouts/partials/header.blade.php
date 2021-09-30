@@ -4,17 +4,21 @@
 
     <div class="d-flex align-items-center gap-3">
         @auth
+            @if (!Route::is('dashboard') && Auth::user()->subscribed())
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm">Dashboard</a>
+            @endif
+
             <span>{{ Auth::user()->username }}</span>
 
             @if (Route::has('logout'))
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="btn btn-secondary btn-sm">{{ __('Logout') }}</button>
+                    <button type="submit" class="btn btn-sm">Sair</button>
                 </form>
             @endif
         @else
             @if (Route::has('login'))
-                <a href="{{ route('login') }}" class="btn btn-primary btn-sm">{{ __('Login') }}</a>
+                <a href="{{ route('login') }}" class="btn btn-primary btn-sm">Entrar</a>
             @endif
         @endauth
     </div>

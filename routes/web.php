@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,8 @@ Route::post('/logout', [LogoutController::class, 'handle'])->middleware('auth')-
 Route::middleware('auth')->group(function () {
     Route::get('/subscribe', [SubscriptionController::class, 'show'])->name('subscribe');
     Route::post('/subscribe', [SubscriptionController::class, 'handle'])->name('subscribe.post');
+    Route::post('/cancel-subscription', [SubscriptionController::class, 'cancel'])->middleware('subscribers')->name('subscribe.cancel');
+    Route::post('/resume-subscription', [SubscriptionController::class, 'resume'])->middleware('subscribers')->name('subscribe.resume');
+
+    Route::get('/dashboard', [DashboardController::class, 'show'])->middleware('subscribers')->name('dashboard');
 });

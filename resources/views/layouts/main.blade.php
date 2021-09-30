@@ -21,7 +21,7 @@
     @if ($show_header ?? true)
         @include('layouts.partials.header')
     @endif
-    @includeIf('layouts.partials.flash-messages')
+    @include('layouts.partials.flash-messages')
 
     <main class="container">
         @yield('content')

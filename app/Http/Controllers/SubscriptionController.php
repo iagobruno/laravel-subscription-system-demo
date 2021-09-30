@@ -36,6 +36,7 @@ class SubscriptionController extends Controller
         } catch (\Exception $e) {
             dd($e->getMessage());
 
+            // TODO: Show error inside view
             return back()->withErrors([
                 'generic-error' => 'Error creating subscription. ' . $e->getMessage()
             ]);
@@ -44,4 +45,19 @@ class SubscriptionController extends Controller
         return redirect()->intended(route('dashboard'));
     }
 
+    public function cancel()
+    {
+        $subscription = Auth::user()->subscription('default');
+        $subscription->cancel();
+
+        return back()->with('info', 'Assinatura cancelada com sucesso. Você ainda pode retomar até o dia ' . $subscription->ends_at->format('d/m/Y') . '.');
+    }
+
+    public function resume()
+    {
+        $subscription = Auth::user()->subscription('default');
+        $subscription->resume();
+
+        return back()->with('success', 'Assinatura retomada com sucesso!');
+    }
 }

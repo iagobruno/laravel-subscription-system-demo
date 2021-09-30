@@ -2,8 +2,16 @@
 
 @section('content')
 <header class="intro py-5 my-3 text-center">
-    <h1 class="mb-5">Obtenha acesso ao conteúdo</h1>
-    <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Assinar</a>
+    @if (!Auth::check())
+        <h1 class="mb-5">Obtenha acesso ao conteúdo</h1>
+        <a href="{{ route('subscribe') }}" class="btn btn-primary btn-lg">Assinar</a>
+    @elseif(!Auth::user()->subscribed())
+        <h1 class="mb-5">Bem-vindo(a) de volta!</h1>
+        <a href="{{ route('subscribe') }}" class="btn btn-primary btn-lg">Finalize sua assinatura</a>
+    @else
+        <h1 class="mb-5">Bem-vindo(a) de volta!</h1>
+        <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg">Ir para o painel de controle</a>
+    @endif
 </header>
 
 <section class="features d-flex justify-evenly align-items-start gap-3 w-75 m-auto mt-5">
