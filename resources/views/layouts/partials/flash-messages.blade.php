@@ -1,6 +1,6 @@
 @if (session('success'))
     <x-alert-flash
-        :message="session('success')"
+        message="{{ session('success') }}"
         type="success"
         dismissible="true"
     />
@@ -8,7 +8,7 @@
 
 @if (session('error'))
     <x-alert-flash
-        :message="session('error')"
+        message="{{ session('error') }}"
         type="danger"
         dismissible="true"
     />
@@ -16,7 +16,7 @@
 
 @if (session('warning'))
     <x-alert-flash
-        :message="session('warning')"
+        message="{{ session('warning') }}"
         type="warning"
         dismissible="true"
     />
@@ -24,7 +24,7 @@
 
 @if (session('info'))
     <x-alert-flash
-        :message="session('info')"
+        message="{{ session('info') }}"
         type="info"
         dismissible="true"
     />

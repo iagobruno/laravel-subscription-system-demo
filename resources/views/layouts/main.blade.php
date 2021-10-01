@@ -18,9 +18,12 @@
     @stack('extra_head')
 </head>
 <body class="@stack('body_class')">
+    @include('layouts.partials.top-banner')
+
     @if ($show_header ?? true)
         @include('layouts.partials.header')
     @endif
+
     @include('layouts.partials.flash-messages')
 
     <main class="container">
