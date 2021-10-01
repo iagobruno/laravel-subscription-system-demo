@@ -60,7 +60,7 @@
                         <td>{{ $invoice->date()->format('d/m/Y') }}</td>
                         <td>{{ $invoice->total() }}</td>
                         <td>{{ $invoice->id }}</td>
-                        <td></td>
+                        <td><a href="{{ $invoice->hosted_invoice_url }}" target="_blank" rel="noopener noreferrer">Ver recibo</a></td>
                     </tr>
                     @endforeach
                 </tbody>

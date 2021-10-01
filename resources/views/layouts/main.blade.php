@@ -26,7 +26,7 @@
 
     @include('layouts.partials.flash-messages')
 
-    <main class="container">
+    <main class="container pb-5">
         @yield('content')
     </main>
 
