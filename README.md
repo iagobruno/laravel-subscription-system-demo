@@ -1,11 +1,15 @@
-## Objetivos
+## Getting started
 
-- Sempre usar transactions para garantir integridade
+```
+git clone https://github.com/iagobruno/laravel-subscription-paywall.git
+cd laravel-subscription-paywall
+composer install
+yarn install
+copy .env.example .env # And edit the values
+php artisan key:generate
+php artisan migrate
+php artisan db:seed # (Optional)
+php artisan serve
+```
 
-- Melhorar a página de inscrição
-    - Mostrar primeiro os planos e depois mostrar os campos de cartão de credito
-- Salvar as informações de cartão de crédito no bando de dados para futuras compras
-- Mostrar erros do servidor na página de /subscribe
-- Pedir pro usuário selecionar um plano na página /subscribe
-- Mostrar um banner no topo pedindo pra reativar a subscription quando o user cancelar e o ends_at estiver próximo (5 dias)
-    - Sua assinatura está próxima de acabar. Reative para continuar usando nossos serviços. [Reativar]
+You can now access the server at http://localhost:8000.
