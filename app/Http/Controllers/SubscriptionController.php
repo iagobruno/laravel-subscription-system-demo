@@ -42,7 +42,8 @@ class SubscriptionController extends Controller
             ]);
         }
 
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('dashboard'))
+            ->with(['success' => 'Assinatura iniciada com sucesso!']);
     }
 
     public function cancel()
