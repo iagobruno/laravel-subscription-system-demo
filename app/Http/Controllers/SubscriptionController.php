@@ -23,22 +23,23 @@ class SubscriptionController extends Controller
 
     public function handle()
     {
-        // dd(request()->all());
+        $data = request()->validate([
+            'plan' => ['required'],
+            'payment_method' => ['required', 'string']
+        ], [
+            'plan.required' => 'Escolha um plano',
+            'payment_method.required' => 'Ocorreu um erro ao validar seu cartão',
+        ]);
 
-        $paymentMethod = request()->input('payment_method');
-        $plan = request()->input('plan');
         $user = Auth::user();
 
         try {
             $user->createOrGetStripeCustomer();
-            $user->addPaymentMethod($paymentMethod);
-            $user->newSubscription('default', $plan)->create($paymentMethod);
+            $user->addPaymentMethod($data['payment_method']);
+            $user->newSubscription('default', $data['plan'])->create($data['payment_method']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
-
-            // TODO: Show error inside view
             return back()->withErrors([
-                'generic-error' => 'Error creating subscription. ' . $e->getMessage()
+                'generic-error' => 'Ocorreu um problema ao tentar iniciar sua assinatura. ' . $e->getMessage()
             ]);
         }
 
@@ -51,7 +52,7 @@ class SubscriptionController extends Controller
         $subscription = Auth::user()->subscription('default');
         $subscription->cancel();
 
-        return back()->with('info', 'Assinatura cancelada com sucesso. Você ainda pode retomar até o dia ' . $subscription->ends_at->format('d/m/Y') . '.');
+        return back()->with('info', 'Assinatura cancelada com sucesso. Você ainda pode utilizar nosso serviço até o dia ' . $subscription->ends_at->format('d/m/Y') . '.');
     }
 
     public function resume()
