@@ -35,8 +35,8 @@ class SubscriptionController extends Controller
 
         try {
             $user->createOrGetStripeCustomer();
-            $user->addPaymentMethod($data['payment_method']);
-            $user->newSubscription('default', $data['plan'])->create($data['payment_method']);
+            $user->updateDefaultPaymentMethod($data['payment_method']);
+            $user->newSubscription('default', $data['plan'])->add();
         } catch (\Exception $e) {
             return back()->withErrors([
                 'generic-error' => 'Ocorreu um problema ao tentar iniciar sua assinatura. ' . $e->getMessage()
