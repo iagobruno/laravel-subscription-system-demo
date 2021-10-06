@@ -29,7 +29,7 @@
 
             <label for="plan-{{ $plan->id }}" class="col plan">
                 <strong class="h3 mb-2 d-block">{{ $plan->product->name }}</strong>
-                <div class="h4">R$ {{ $plan->amount/100 }} <small class="text-muted fs-6 fw-normal">/por mês</small></div>
+                <div class="h4">R$ {{ $plan->unit_amount / 100 }} <small class="text-muted fs-6 fw-normal">/por mês</small></div>
                 <p class="m-0">{{ $plan->product->description }}</p>
             </label>
         @endforeach

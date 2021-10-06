@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Cashier\Billable;
-use App\Helpers\Stripe;
 
 class User extends Authenticatable
 {
@@ -42,6 +41,6 @@ class User extends Authenticatable
         }
 
         $productId = $this->subscription('default')->items->first()->stripe_product;
-        return Stripe::client()->products->retrieve($productId);
+        return \Stripe\Product::retrieve($productId);
     }
 }

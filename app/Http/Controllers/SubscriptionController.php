@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Stripe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,8 +17,14 @@ class SubscriptionController extends Controller
             return redirect()->intended(route('dashboard'));
         }
 
+        $plans = \Stripe\Price::all(['type' => 'recurring'])->data;
+        foreach ($plans as $plan) {
+            $plan->product_id = $plan->product;
+            $plan->product = \Stripe\Product::retrieve($plan->product_id);
+        }
+
         return view('subscribe', [
-            'plans' => Stripe::getPlans(),
+            'plans' => $plans,
             'intent' => $user->createSetupIntent(),
         ]);
     }
