@@ -9,10 +9,13 @@ class DashboardController extends Controller
 {
     public function show()
     {
+        /** @var \App\Models\User */
+        $user = Auth::user();
+
         return view('dashboard', [
-            'currentSubscription' => Auth::user()->subscription('default'),
-            'currentPlanInfos' => Auth::user()->getCurrentPlanInfos(),
-            'invoices' => Auth::user()->invoices(),
+            'currentSubscription' => $user->subscription('default'),
+            'currentPlanInfos' => $user->getCurrentPlanInfos(),
+            'invoices' => $user->invoices(),
         ]);
     }
 }

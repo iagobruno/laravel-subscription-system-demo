@@ -21,8 +21,11 @@ class OnlySubscribers
             return redirect()->route('login');
         }
 
+        /** @var \App\Models\User */
+        $user = Auth::user();
+
         // Redirects the user to subscription page if they don't have an active subscription
-        if (!Auth::user()->subscribed()) {
+        if (!$user->subscribed()) {
             return redirect()->route('subscribe');
         }
 
