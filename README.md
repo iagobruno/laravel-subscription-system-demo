@@ -25,5 +25,6 @@ You can now access the server at http://localhost:8000.
 
 ## Notas pro meu eu do futuro
 
-- Salvar os dados do cartão de crédito do cliente no db para não solicitar novamente.
-- Permitir que o cliente mude de plano.
+- Usar o [embeddable pricing table](https://stripe.com/docs/payments/checkout/pricing-table?locale=pt-BR) do Stripe pra mostrar os planos.
+- Usar o [costumer portal](https://stripe.com/docs/customer-management) do Stripe para permitir q os clientes gerenciem suas assinaturas.
+- Usar o [webhooks](https://stripe.com/docs/webhooks) para inciar, atualizar e cancelar assinaturas.
